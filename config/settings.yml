@@ -1,0 +1,14 @@
+plugins:
+  twilio_notifications_enabled:
+    default: true
+    client: true
+  twilio_notifications_account_sid:
+    default: ""
+    client: true
+  twilio_notifications_auth_token:
+    default: ""
+    client: true
+  twilio_notifications_phone_number:
+    default: ""
+    client: true
+
