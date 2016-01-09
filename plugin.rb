@@ -28,7 +28,7 @@ after_initialize do
       return "+#{SiteSetting.twilio_notifications_phone_number}"
     end
 
-    def enable_twilio_messaging?
+    def enable_twilio_messaging?(user)
       user.custom_fields["enable_sms"]
     end
 
@@ -37,9 +37,8 @@ after_initialize do
     end
 
     def send
-      puts "TEXT: #{@message.text_part}"
 
-      # if enable_twilio_messaging?
+      if enable_twilio_messaging?(@user)
         client = Twilio::REST::Client.new account_sid, auth_token
 
         client.account.messages.create(
@@ -47,7 +46,7 @@ after_initialize do
             :to => user_mobile(@user),
             :body => @message.text_part
         )
-      # end
+      end
 
       # @@client.account.messages.create(
       #                              :from => @@from,
